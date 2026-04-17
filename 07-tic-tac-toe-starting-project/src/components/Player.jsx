@@ -1,5 +1,5 @@
 import { useState } from "react"
-export default function Player({ player, symbol, isActive }) {
+export default function Player({ player, symbol, isActive,onPlayerNameChange }) {
     const [isEditing, setIsEditing] = useState(false)
     const[name, setName] = useState(player)
     let content = <span className="player-name">{name}</span>
@@ -9,7 +9,9 @@ export default function Player({ player, symbol, isActive }) {
         // if the state value depends on old state, never update like above, rather use function to update
 
         setIsEditing(item=>!item) // this is the correct way
-
+        if(isEditing){
+            onPlayerNameChange(symbol, name)
+        }
     }
 
     function handleChange(event){
